@@ -92,12 +92,12 @@ public class TodoItem {
     }
     public String getSummary() {
         return "TodoItem{" +
-                "id=" + id +
-                ", title='" + title + '\n' +
-                ", taskDescription='" + taskDescription + '\n' +
-                ", deadLine=" + deadLine +
-                ", done=" + done +
-                ", creator=" + creator +
+                "id :" + id +
+                ", title: " + title +
+                "\nDescription: " + taskDescription +
+                "\ndeadline: " + (deadLine == null ? "No deadline set yet." : deadLine) +
+                ", done: " + done +
+                "\ncreator:" + creator.getFullName() +
                 '}';
     }
 

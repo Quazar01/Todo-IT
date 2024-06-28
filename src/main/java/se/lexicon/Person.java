@@ -10,9 +10,9 @@ public class Person {
     // Constructor
     public Person(String firstName, String lastName, String email) {
         setId();
-        validateAndAssignInput(firstName, "firstName");
-        validateAndAssignInput(lastName, "lastName");
-        validateAndAssignInput(email, "email");
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
     }
 
     // Helper methods
@@ -21,23 +21,12 @@ public class Person {
         sequencer++;
     }
 
-    private void validateAndAssignInput (String input, String paramName) {
-        if (input == null || input.isEmpty()) {
+    private void validateStringInput(String input, String paramName) {
+        if (input == null || input.trim().isEmpty()) {
             throw new IllegalArgumentException(paramName + " must not be null or empty");
         }
         if (paramName.equals("email") && !input.contains("@")) {
             throw new IllegalArgumentException("email must contain @");
-        }
-        switch (paramName) {
-            case "firstName":
-                this.firstName = input;
-                break;
-            case "lastName":
-                this.lastName = input;
-                break;
-            case "email":
-                this.email = input;
-                break;
         }
     }
 
@@ -58,18 +47,21 @@ public class Person {
         return email;
     }
     public void setFirstName(String firstName) {
-        validateAndAssignInput(firstName, "firstName");
+        validateStringInput(firstName, "firstName");
+        this.firstName = firstName;
     }
     public void setLastName(String lastName) {
-        validateAndAssignInput(lastName, "lastName");
+        validateStringInput(lastName, "lastName");
+        this.lastName = lastName;
     }
     public void setEmail(String email) {
-        validateAndAssignInput(email, "email");
+        validateStringInput(email, "email");
+        this.email = email;
     }
 
     // Methods
     public String getSummary() {
-        return "{id:" + id + ", name: " + getFullName() + ", email: " + email + "}";
+        return "{id: " + id + ", name: " + getFullName() + ", email: " + email + "}";
     }
 
 }

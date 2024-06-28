@@ -1,6 +1,5 @@
 package se.lexicon;
 
-import java.util.Collections;
 
 public class TodoItemTask {
     private int id;
@@ -19,7 +18,7 @@ public class TodoItemTask {
 
     // Constructor with no person assigned
     public TodoItemTask(TodoItem todoItem) {
-        setId(id);
+        setId();
         setTodoItem(todoItem);
         setAssignee(null);
 
@@ -27,7 +26,7 @@ public class TodoItemTask {
     }
 
     // Helper methods
-    private void setId(int id) {
+    private void setId() {
         this.id = sequencer + 1;
         sequencer++;
     }
@@ -55,6 +54,7 @@ public class TodoItemTask {
         return assignee;
     }
     public void setAssignee(Person assignee) {
+
         this.assignee = assignee;
     }
 

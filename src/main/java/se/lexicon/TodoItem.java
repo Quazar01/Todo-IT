@@ -15,8 +15,8 @@ public class TodoItem {
     // Constructor
     public TodoItem(String title, String taskDescription, Person creator) {
         setId();
-        validateAndAssignInput(title, "title");
-        validateAndAssignInput(taskDescription, "description");
+        setTitle(title);
+        setDescription(taskDescription);
         this.done = false;
         if (creator == null) {
             throw new NullPointerException("creator must not be null");
@@ -29,17 +29,9 @@ public class TodoItem {
         this.id = sequencer + 1;
         sequencer++;
     }
-    private void validateAndAssignInput (String input, String paramName) {
-        if (input == null || input.isEmpty()) {
+    private void validateStringInput(String input, String paramName) {
+        if (input == null || input.trim().isEmpty()) {
             throw new IllegalArgumentException(paramName + " must not be null or empty");
-        }
-        switch (paramName) {
-            case "title":
-                this.title = input;
-                break;
-            case "description":
-                this.taskDescription = input;
-                break;
         }
     }
 
@@ -51,13 +43,15 @@ public class TodoItem {
         return title;
     }
     public void setTitle(String title) {
-        validateAndAssignInput(title, "title");
+        validateStringInput(title, "title");
+        this.title = title;
     }
-    public String getTaskDescription() {
+    public String getDescription() {
         return taskDescription;
     }
-    public void setTaskDescription(String description) {
-        validateAndAssignInput(description, "description");
+    public void setDescription(String description) {
+        validateStringInput(description, "description");
+        this.taskDescription = description;
     }
     public LocalDate getDeadLine() {
         return deadLine;
@@ -78,10 +72,10 @@ public class TodoItem {
             this.done = done;
         }
     }
-    public Person getCreator() {
+    public Person getAssignee() {
         return creator;
     }
-    public void setCreator(Person creator) {
+    public void setAssignee(Person creator) {
         if (creator == null) {
             throw new NullPointerException("creator must not be null");
         }

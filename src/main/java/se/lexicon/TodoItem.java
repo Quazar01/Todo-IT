@@ -1,6 +1,7 @@
 package se.lexicon;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class TodoItem {
     private int id;
@@ -84,15 +85,31 @@ public class TodoItem {
     public boolean isOverDue() {
         return LocalDate.now().isAfter(deadLine);
     }
-    public String getSummary() {
+
+    @Override
+    public String toString() {
         return "TodoItem{" +
-                "id :" + id +
-                ", title: " + title +
-                "\nDescription: " + taskDescription +
-                "\ndeadline: " + (deadLine == null ? "No deadline set yet." : deadLine) +
-                ", done: " + done +
-                "\ncreator:" + creator.getFullName() +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", deadLine=" + deadLine +
+                ", done=" + done +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TodoItem todoItem = (TodoItem) o;
+        // Does not compare id, of course two different objects will have different id.
+        // Do we have to compare creator as well? The TodoItem should not be different if it was created by different people!
+        return done == todoItem.done && Objects.equals(title, todoItem.title) && Objects.equals(taskDescription, todoItem.taskDescription) && Objects.equals(deadLine, todoItem.deadLine);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, taskDescription, deadLine, done);
     }
 
 }

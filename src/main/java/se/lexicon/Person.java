@@ -1,11 +1,14 @@
 package se.lexicon;
 
+import java.util.Objects;
+
 public class Person {
     private int id;
     private String firstName; // Not allowed to be null.
     private String lastName; // Not allowed to be null.
     private String email; // Not allowed to be null.
     private static int sequencer = 0;
+    private AppUser credentials;
 
     // Constructor
     public Person(String firstName, String lastName, String email) {
@@ -43,6 +46,9 @@ public class Person {
     public String getLastName() {
         return lastName;
     }
+    public AppUser getCredentials() {
+        return credentials;
+    }
     public String getEmail() {
         return email;
     }
@@ -54,15 +60,38 @@ public class Person {
         validateStringInput(lastName, "lastName");
         this.lastName = lastName;
     }
+    public void setCredentials(AppUser credentials) {
+        this.credentials = credentials;
+    }
     public void setEmail(String email) {
         validateStringInput(email, "email");
         this.email = email;
     }
 
     // Methods
-    public String getSummary() {
-        return "{id: " + id + ", name: " + getFullName() + ", email: " + email + "}";
+
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id: " + id +
+                ", firstName: '" + firstName + '\'' +
+                ", lastName: '" + lastName + '\'' +
+                ", email: '" + email +
+                '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(email, person.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email);
+    }
 }
 

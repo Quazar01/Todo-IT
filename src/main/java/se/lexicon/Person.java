@@ -61,6 +61,9 @@ public class Person {
         this.lastName = lastName;
     }
     public void setCredentials(AppUser credentials) {
+        if (credentials == null) {
+            throw new IllegalArgumentException("credentials must not be null");
+        }
         this.credentials = credentials;
     }
     public void setEmail(String email) {
@@ -69,6 +72,7 @@ public class Person {
     }
 
     // Methods
+
 
 
     @Override
@@ -86,12 +90,12 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return id == person.id && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(email, person.email);
+        return  Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(email, person.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email);
+        return Objects.hash(firstName, lastName, email);
     }
 }
 

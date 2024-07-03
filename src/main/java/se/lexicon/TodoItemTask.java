@@ -14,8 +14,7 @@ public class TodoItemTask {
     public TodoItemTask(TodoItem todoItem, Person assignee) {
         this(todoItem);
         setAssignee(assignee);
-
-        setAssigned(assignee);
+        setAssigned(true);
     }
 
     // Constructor with no person assigned
@@ -24,7 +23,7 @@ public class TodoItemTask {
         setTodoItem(todoItem);
         setAssignee(null);
 
-        setAssigned(null);
+        setAssigned(false);
     }
 
     // Helper methods
@@ -40,8 +39,8 @@ public class TodoItemTask {
     public boolean isAssigned() {
         return assigned;
     }
-    public void setAssigned(Person assignee) {
-        this.assigned = assignee != null;
+    public void setAssigned(boolean assigned) {
+        this.assigned = assigned;
     }
     public TodoItem getTodoItem() {
         return todoItem;
@@ -56,8 +55,8 @@ public class TodoItemTask {
         return assignee;
     }
     public void setAssignee(Person assignee) {
-
         this.assignee = assignee;
+        setAssigned(true);
     }
 
     // Methods

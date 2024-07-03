@@ -8,17 +8,18 @@ public class App
     public static void main( String[] args )
     {
         AppRole user = AppRole.ROLE_APP_USER;
-        AppRole admin = AppRole.ROLE_APP_ADMIN;
-
+        AppRole admin = AppRole.ROLE_APP_ADMIN;;
         // Create an AppUser object
         AppUser credentials = new AppUser("sami.alabed", "password123", admin);
         // Create a Person object
         Person sami = new Person("Sami", "Alabed", "sami.alabed@gmail.com");
         // Set the credentials for the person
         sami.setCredentials(credentials);
+
         // print the person object using the overridden toString method
         System.out.println("Person:");
         System.out.println(sami);
+
         // Print the credentials of the person
         System.out.println("\nCredentials:");
         System.out.println(sami.getCredentials());

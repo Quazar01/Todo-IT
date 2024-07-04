@@ -1,4 +1,5 @@
 package se.lexicon;
+import se.lexicon.Model.*;
 
 /**
  * TODO: Add a Test class to test the classes in this package.
@@ -8,7 +9,7 @@ public class App
     public static void main( String[] args )
     {
         AppRole user = AppRole.ROLE_APP_USER;
-        AppRole admin = AppRole.ROLE_APP_ADMIN;;
+        AppRole admin = AppRole.ROLE_APP_ADMIN;
         // Create an AppUser object
         AppUser credentials = new AppUser("sami.alabed", "password123", admin);
         // Create a Person object

@@ -1,6 +1,7 @@
 package se.lexicon;
 
 import org.junit.jupiter.api.Test;
+import se.lexicon.Model.*;
 
 public class AppTest {
 
@@ -117,10 +118,37 @@ public class AppTest {
         assert todoItem.getAssignee().equals(julian);
         // Check if the todoItem is not done when created.
         if (todoItem.isDone()) throw new AssertionError();
+        // Assign due date to the todoItem.
+        todoItem.setDeadLine("2024-10-01");
+        assert todoItem.getDeadLine().toString().equals("2024-10-01");
+        // Check if the todoItem is overdue.
+        if (todoItem.isOverDue()) throw new AssertionError();
         // Set the todoItem to done.
         todoItem.setDone(true);
         // Check if the todoItem is done.
         if (!todoItem.isDone()) throw new AssertionError();
+
+        // Try to set a null assignee.
+        try {
+            todoItem.setAssignee(null);
+            throw new AssertionError();
+        } catch (NullPointerException e) {
+            assert e.getMessage().contains("creator must not be null");
+        }
+        // Try to set a null deadLine.
+        try {
+            todoItem.setDeadLine(null);
+            throw new AssertionError();
+        } catch (IllegalArgumentException e) {
+            assert e.getMessage().contains("deadLine must not be null or empty");
+        }
+        // Try to set a past deadLine.
+        try {
+            todoItem.setDeadLine("2020-10-01");
+            throw new AssertionError();
+        } catch (IllegalArgumentException e) {
+            assert e.getMessage().contains("deadLine must not be before current date.");
+        }
     }
 
     @Test

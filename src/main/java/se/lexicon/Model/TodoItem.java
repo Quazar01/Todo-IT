@@ -1,4 +1,4 @@
-package se.lexicon;
+package se.lexicon.Model;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -57,11 +57,15 @@ public class TodoItem {
     public LocalDate getDeadLine() {
         return deadLine;
     }
-    public void setDeadLine(LocalDate deadLine) {
-        if (deadLine == null || deadLine.isBefore(LocalDate.now())) {
-            throw new NullPointerException("deadLine must not be null");
+    public void setDeadLine(String stringDate) {
+        if (stringDate == null || stringDate.isEmpty()) {
+            throw new IllegalArgumentException("deadLine must not be null or empty");
         }
-        this.deadLine = deadLine;
+        LocalDate deadline = LocalDate.parse(stringDate);
+        if (deadline.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("deadLine must not be before current date.");
+        }
+        this.deadLine = deadline;
     }
     public boolean isDone() {
         return done;

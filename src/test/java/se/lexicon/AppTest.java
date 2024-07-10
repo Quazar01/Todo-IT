@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import se.lexicon.Model.*;
 import se.lexicon.DAO.Collections.*;
 
+import java.time.LocalDate;
+
 public class AppTest {
 
     @Test
@@ -200,6 +202,40 @@ public class AppTest {
         } catch (IllegalArgumentException e) {
             assert e.getMessage().contains("deadLine must not be before current date.");
         }
+    }
+
+    @Test
+    public void testTodoItemDAOCollection() {
+        // Create a Person object
+        Person sami = new Person("Sami", "Alabed", "sami.alabed@gmail.com");
+        // Create a TodoItem object
+        TodoItem todoItem = new TodoItem("Assignment pt 1", "Todo-IT workshop", sami);
+        // Create another TodoItem object
+        TodoItem todoItem2 = new TodoItem("Assignment pt 2", "Todo-IT workshop", sami);
+        // Create a TodoItemDAOCollection object
+        TodoItemDAOCollection todoItemDAOCollection = new TodoItemDAOCollection();
+        // Persist the TodoItem objects
+        todoItemDAOCollection.persist(todoItem);
+        // Test the persist method
+        assert todoItemDAOCollection.findByTitleContains("Assignment").size() == 1;
+        assert todoItemDAOCollection.findByTitleContains("Assignment").contains(todoItem);
+        // Test the findById method
+        assert todoItemDAOCollection.findById(todoItem.getId()).equals(todoItem);
+        // Test the findByPersonId method
+        assert todoItemDAOCollection.findByPersonId(sami.getId()).size() == 1;
+        assert todoItemDAOCollection.findByPersonId(sami.getId()).contains(todoItem);
+        // Test the findByDeadlineBefore method
+        assert todoItemDAOCollection.findByDeadlineBefore(LocalDate.parse("2024-10-01")).size() == 1;
+        assert todoItemDAOCollection.findByDeadlineBefore(LocalDate.parse("2024-10-01")).contains(todoItem);
+        // Test the findByDeadlineAfter method
+        assert todoItemDAOCollection.findByDeadlineAfter(LocalDate.parse("2024-10-01")).isEmpty();
+        // Persist another TodoItem object
+        todoItemDAOCollection.persist(todoItem2);
+        // Test the remove method
+        todoItemDAOCollection.remove(todoItem.getId());
+        assert todoItemDAOCollection.findAllByDoneStatus(false).size() == 1;
+        assert !todoItemDAOCollection.findAllByDoneStatus(false).contains(todoItem);
+
     }
 
     @Test

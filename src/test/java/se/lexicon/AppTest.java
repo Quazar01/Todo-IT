@@ -2,6 +2,7 @@ package se.lexicon;
 
 import org.junit.jupiter.api.Test;
 import se.lexicon.Model.*;
+import se.lexicon.DAO.Collections.*;
 
 public class AppTest {
 
@@ -49,6 +50,30 @@ public class AppTest {
         // Assert the hashcode of the two AppUsers are not equal.
         assert credentials.hashCode() != credentials3.hashCode();
     }
+
+    @Test
+    public void testAppUserDAOCollection() {
+        // Create an AppUser object
+        AppUser credentials = new AppUser("sami.alabed", "password123", AppRole.ROLE_APP_ADMIN);
+        // Create another AppUser object
+        AppUser credentials2 = new AppUser("julian", "password123", AppRole.ROLE_APP_USER);
+        // Create an AppUserDAOCollection object
+        AppUserDAOCollection appUserDAOCollection = new AppUserDAOCollection();
+        // Persist the AppUser objects
+        appUserDAOCollection.persist(credentials);
+        // Test the persist method
+        assert appUserDAOCollection.findAll().size() == 1;
+        assert appUserDAOCollection.findAll().contains(credentials);
+        // Test the findByUserName method
+        assert appUserDAOCollection.findByUserName("sami.alabed").equals(credentials);
+        // Persist another AppUser object
+        appUserDAOCollection.persist(credentials2);
+        // Test the remove method
+        appUserDAOCollection.remove("sami.alabed");
+        assert appUserDAOCollection.findAll().size() == 1;
+        assert !appUserDAOCollection.findAll().contains(credentials);
+    }
+
 
     @Test
     public void testPerson() {

@@ -3,6 +3,7 @@ package se.lexicon.Model;
 import java.util.Objects;
 
 public class AppUser {
+    private int Id;
     private String username; // Not allowed to be null or empty.
     private String password; // Not allowed to be null or empty.
     private AppRole role; // Not allowed to be null.
@@ -22,6 +23,12 @@ public class AppUser {
         this.role = role;
     }
     // Getters and Setters
+    public int getId() {
+        return Id;
+    }
+    public void setId(int id) {
+        Id = id;
+    }
     public String getUsername() {
         return username;
     }

@@ -1,5 +1,9 @@
 package se.lexicon;
+import se.lexicon.DAO.Collections.AppUserDAOCollection;
 import se.lexicon.Model.*;
+
+import java.util.ArrayList;
+
 
 /**
  * TODO: Add a Test class to test the classes in this package.
@@ -10,8 +14,27 @@ public class App
     {
         AppRole user = AppRole.ROLE_APP_USER;
         AppRole admin = AppRole.ROLE_APP_ADMIN;
+
+        // List of AppUser objects
         // Create an AppUser object
         AppUser credentials = new AppUser("sami.alabed", "password123", admin);
+        // Create another AppUser object
+        AppUser credentials2 = new AppUser("julian", "password123", user);
+
+        // Use the AppUserDAOCollection class to persist the AppUser objects
+        AppUserDAOCollection appUserDAOCollection = new AppUserDAOCollection();
+        appUserDAOCollection.persist(credentials);
+        appUserDAOCollection.persist(credentials2);
+        System.out.println("AppUserDAOCollection:\n" + appUserDAOCollection.findAll());
+
+        // Find an AppUser by username
+        System.out.println("\nFind an AppUser by username:");
+        System.out.println(appUserDAOCollection.findByUserName("sami.alabed"));
+        // Remove an AppUser by username
+        appUserDAOCollection.remove("sami.alabed");
+        System.out.println("\nAppUserDAOCollection after removing an AppUser:\n" + appUserDAOCollection.findAll());
+
+
         // Create a Person object
         Person sami = new Person("Sami", "Alabed", "sami.alabed@gmail.com");
         // Set the credentials for the person

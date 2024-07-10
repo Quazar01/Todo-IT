@@ -36,6 +36,12 @@ public class TodoItemTask {
     public int getId() {
         return id;
     }
+    public void setId(int id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("id must not be less than 0");
+        }
+        this.id = id;
+    }
     public boolean isAssigned() {
         return assigned;
     }

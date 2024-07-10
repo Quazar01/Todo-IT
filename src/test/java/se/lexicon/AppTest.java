@@ -257,4 +257,47 @@ public class AppTest {
         assert todoItemTask.getAssignee().equals(julian);
         if (!todoItemTask.isAssigned()) throw new AssertionError();
     }
+
+    @Test
+    public void testTodoItemTaskDAOCollection() {
+        // Create a Person object
+        Person sami = new Person("Sami", "Alabed", "sami.alabed@gmail.com");
+        // Create a TodoItem object
+        TodoItem todoItem = new TodoItem("Assignment pt 1", "Todo-IT workshop", sami);
+        // Create a TodoItemTask object
+        TodoItemTask todoItemTask = new TodoItemTask(todoItem);
+        // Assign the TodoItemTask to a person
+        todoItemTask.setAssignee(sami);
+        // Create another TodoItem object
+        TodoItem todoItem2 = new TodoItem("Assignment pt 2", "Todo-IT workshop", sami);
+        // Create another TodoItemTask object
+        TodoItemTask todoItemTask2 = new TodoItemTask(todoItem2);
+        // Create a TodoItemTaskDAOCollection object
+        TodoItemTaskDAOCollection todoItemTaskDAOCollection = new TodoItemTaskDAOCollection();
+        // Persist the TodoItemTask objects
+        todoItemTaskDAOCollection.persist(todoItemTask);
+        // Test the persist method
+        assert todoItemTaskDAOCollection.findAll().size() == 1;
+        assert todoItemTaskDAOCollection.findAll().contains(todoItemTask);
+        // Test the findById method
+        assert todoItemTaskDAOCollection.findById(todoItemTask.getId()).equals(todoItemTask);
+        // Test the findByAssignedStatus method
+        assert todoItemTaskDAOCollection.findByAssignedStatus(true).size() == 1;
+
+        // Test the findByPersonId method
+        assert todoItemTaskDAOCollection.findByPersonId(sami.getId()).size() == 1;
+        assert todoItemTaskDAOCollection.findByPersonId(sami.getId()).contains(todoItemTask);
+
+        // Persist another TodoItemTask object
+        todoItemTaskDAOCollection.persist(todoItemTask2);
+
+        // Test the remove method
+        todoItemTaskDAOCollection.remove(todoItemTask.getId());
+        assert todoItemTaskDAOCollection.findAll().size() == 1;
+
+
+
+
+    }
+
 }

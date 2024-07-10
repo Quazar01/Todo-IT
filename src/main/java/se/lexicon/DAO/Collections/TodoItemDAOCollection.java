@@ -1,10 +1,8 @@
 package se.lexicon.DAO.Collections;
 
-import com.sun.tools.javac.comp.Todo;
 import se.lexicon.DAO.IdSequencer.TodoItemSequencer;
 import se.lexicon.DAO.TodoItemDAO;
 import se.lexicon.Model.TodoItem;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 

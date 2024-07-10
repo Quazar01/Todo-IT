@@ -129,6 +129,32 @@ public class AppTest {
     }
 
     @Test
+    public void testPersonDAOCollection() {
+        // Create a Person object
+        Person sami = new Person("Sami", "Alabed", "sami.alabed@gmail.com");
+        // Create another Person object
+        Person julian = new Person("Julian", "Assange", "julian@wikileaks.com");
+        // Create a PersonDAOCollection object
+        PersonDAOCollection personDAOCollection = new PersonDAOCollection();
+        // Persist the Person objects
+        personDAOCollection.persist(sami);
+        // Test the persist method
+        assert personDAOCollection.findAll().size() == 1;
+        assert personDAOCollection.findAll().contains(sami);
+        // Test the findById method
+        assert personDAOCollection.findById(sami.getId()).equals(sami);
+        // Test the findByEmail method
+        assert personDAOCollection.findByEmail("sami.alabed@gg") == null;
+        assert personDAOCollection.findByEmail("sami.alabed@gmail.com").equals(sami);
+        // Persist another Person object
+        personDAOCollection.persist(julian);
+        // Test the remove method
+        personDAOCollection.remove(sami.getId());
+        assert personDAOCollection.findAll().size() == 1;
+        assert !personDAOCollection.findAll().contains(sami);
+    }
+
+    @Test
     public void testTodoItem() {
         // Create a Person object
         Person sami = new Person("Sami", "Alabed", "sami@gmail.com");

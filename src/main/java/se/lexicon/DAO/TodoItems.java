@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public interface TodoItemDAO {
+public interface TodoItems {
     TodoItem persist(TodoItem todoItem);
     TodoItem findById(int todoItemId);
     ArrayList<TodoItem> findAllByDoneStatus(boolean done);

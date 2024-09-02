@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class TodoItem {
-    private int id;
+    private int todo_id;
     private String title; // Not allowed to be null.
-    private String taskDescription; // is used to hold further information.
+    private String description; // is used to hold further information.
     private LocalDate deadLine; // Not allowed to be null.
     // TodoItem is considered overdue if deadLine current date > deadLine.
     private boolean done; // default value is false.
@@ -14,10 +14,10 @@ public class TodoItem {
     private static int sequencer = 0;
 
     // Constructor
-    public TodoItem(String title, String taskDescription, Person creator) {
+    public TodoItem(String title, String description, Person creator) {
         setId();
         setTitle(title);
-        setDescription(taskDescription);
+        setDescription(description);
         this.done = false;
         if (creator == null) {
             throw new NullPointerException("creator must not be null");
@@ -27,7 +27,7 @@ public class TodoItem {
 
     // Helper methods
     private void setId() {
-        this.id = sequencer + 1;
+        this.todo_id = sequencer + 1;
         sequencer++;
     }
     private void validateStringInput(String input, String paramName) {
@@ -37,14 +37,14 @@ public class TodoItem {
     }
 
     // Getters and Setters
-    public int getId() {
-        return id;
+    public int getTodo_id() {
+        return todo_id;
     }
-    public void setId(int id) {
-        if (id < 0) {
+    public void setTodo_id(int todo_id) {
+        if (todo_id < 0) {
             throw new IllegalArgumentException("id must not be less than 0");
         }
-        this.id = id;
+        this.todo_id = todo_id;
     }
 
     public String getTitle() {
@@ -55,11 +55,11 @@ public class TodoItem {
         this.title = title;
     }
     public String getDescription() {
-        return taskDescription;
+        return description;
     }
     public void setDescription(String description) {
         validateStringInput(description, "description");
-        this.taskDescription = description;
+        this.description = description;
     }
     public LocalDate getDeadLine() {
         return deadLine;
@@ -100,9 +100,9 @@ public class TodoItem {
     @Override
     public String toString() {
         return "TodoItem{" +
-                "id=" + id +
+                "id=" + todo_id +
                 ", title='" + title + '\'' +
-                ", taskDescription='" + taskDescription + '\'' +
+                ", taskDescription='" + description + '\'' +
                 ", deadLine=" + deadLine +
                 ", done=" + done +
                 '}';
@@ -115,12 +115,12 @@ public class TodoItem {
         TodoItem todoItem = (TodoItem) o;
         // Does not compare id, of course two different objects will have different id.
         // Do we have to compare creator as well? The TodoItem should not be different if it was created by different people!
-        return done == todoItem.done && Objects.equals(title, todoItem.title) && Objects.equals(taskDescription, todoItem.taskDescription) && Objects.equals(deadLine, todoItem.deadLine);
+        return done == todoItem.done && Objects.equals(title, todoItem.title) && Objects.equals(description, todoItem.description) && Objects.equals(deadLine, todoItem.deadLine);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, taskDescription, deadLine, done);
+        return Objects.hash(title, description, deadLine, done);
     }
 
 }

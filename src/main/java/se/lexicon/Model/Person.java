@@ -3,24 +3,24 @@ package se.lexicon.Model;
 import java.util.Objects;
 
 public class Person {
-    private int id;
-    private String firstName; // Not allowed to be null.
-    private String lastName; // Not allowed to be null.
+    private int person_id;
+    private String first_name; // Not allowed to be null.
+    private String last_name; // Not allowed to be null.
     private String email; // Not allowed to be null.
     private static int sequencer = 0;
     private AppUser credentials;
 
     // Constructor
-    public Person(String firstName, String lastName, String email) {
-        setId();
-        setFirstName(firstName);
-        setLastName(lastName);
-        setEmail(email);
+
+    public Person(String first_name, String last_name) {
+
+        setFirst_name(first_name);
+        setLast_name(last_name);
     }
 
     // Helper methods
     private void setId() {
-        this.id = sequencer + 1;
+        this.person_id = sequencer + 1;
         sequencer++;
     }
 
@@ -34,20 +34,20 @@ public class Person {
     }
 
     // Getters and Setters
-    public int getId() {
-        return id;
+    public int getPerson_id() {
+        return person_id;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setPerson_id(int person_id) {
+        this.person_id = person_id;
     }
     public String getFullName() {
-        return firstName + " " + lastName;
+        return first_name + " " + last_name;
     }
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
     public AppUser getCredentials() {
         return credentials;
@@ -55,13 +55,13 @@ public class Person {
     public String getEmail() {
         return email;
     }
-    public void setFirstName(String firstName) {
-        validateStringInput(firstName, "firstName");
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        validateStringInput(first_name, "firstName");
+        this.first_name = first_name;
     }
-    public void setLastName(String lastName) {
-        validateStringInput(lastName, "lastName");
-        this.lastName = lastName;
+    public void setLast_name(String last_name) {
+        validateStringInput(last_name, "lastName");
+        this.last_name = last_name;
     }
     public void setCredentials(AppUser credentials) {
         if (credentials == null) {
@@ -81,9 +81,9 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "id: " + id +
-                ", firstName: '" + firstName + '\'' +
-                ", lastName: '" + lastName + '\'' +
+                "id: " + person_id +
+                ", firstName: '" + first_name + '\'' +
+                ", lastName: '" + last_name + '\'' +
                 ", email: '" + email +
                 '}';
     }
@@ -93,12 +93,12 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return  Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(email, person.email);
+        return  Objects.equals(first_name, person.first_name) && Objects.equals(last_name, person.last_name) && Objects.equals(email, person.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email);
+        return Objects.hash(first_name, last_name, email);
     }
 }
 

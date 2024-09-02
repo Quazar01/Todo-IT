@@ -18,6 +18,7 @@ public class AppUserDAOCollection implements AppUserDAO {
     @Override
     public AppUser persist(AppUser appUser) {
         if (appUser == null) throw new IllegalArgumentException("AppUser should not be null");
+        if (appUserList.contains(appUser)) throw new IllegalArgumentException("AppUser is already in the list");
         // Set an id for the appUser
         appUser.setId(AppUserSequencer.nextId());
         // Add the appUser to the list

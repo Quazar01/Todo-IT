@@ -61,7 +61,7 @@ public class TodoItemTaskDAOCollection implements TodoItemTaskDAO {
         }
         ArrayList<TodoItemTask> tasksAssignedToThePerson = new ArrayList<>();
         for (TodoItemTask todoItemTask : todoItemTasks) {
-            if (todoItemTask.getAssignee().getId() == personId) {
+            if (todoItemTask.getAssignee().getPerson_id() == personId) {
                 tasksAssignedToThePerson.add(todoItemTask);
             }
         }

@@ -1,4 +1,4 @@
-package se.lexicon.DAO.Collections;
+package se.lexicon.DAO.Implementations;
 
 import se.lexicon.DAO.People;
 import se.lexicon.Model.Person;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class PeopleCollection implements People {
+public class PeopleImpl implements People {
     ArrayList<Person> people;
 
     @Override
@@ -48,6 +48,7 @@ public class PeopleCollection implements People {
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name")
                 );
+                person.setPerson_id(resultSet.getInt("person_id"));
                 result.add(person);
             }
         } catch (SQLException e) {
@@ -65,10 +66,12 @@ public class PeopleCollection implements People {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                return new Person(
+                Person person =  new Person(
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name")
                 );
+                person.setPerson_id(resultSet.getInt("person_id"));
+                return person;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,28 +81,64 @@ public class PeopleCollection implements People {
 
     @Override
     public Collection<Person> findByName(String name) {
-        // Seperate the first name and last name
-        String firstName = name.split(" ")[0];
-        String lastName = name.split(" ")[1];
-        try {
-            Connection connection = SQLConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE first_name = ? AND last_name = ?");
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        Connection connection = SQLConnection.getConnection();
 
-            List<Person> result = new ArrayList<>();
-            while (resultSet.next()) {
-                Person person = new Person(
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name")
-                );
-                result.add(person);
-            }
-            return result;
-        } catch (SQLException e) {
-            e.printStackTrace();
+        // Seperate the first name and last name
+        String[] names = name.split(" ");
+        String firstName = "";
+        String lastName = "";
+        if (names.length < 1) {
+            throw new IllegalArgumentException("Name must contain at least a first name");
         }
+        else if (names.length < 2) {
+            firstName = names[0];
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE first_name = ?");
+                preparedStatement.setString(1, firstName);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                List<Person> result = new ArrayList<>();
+                while (resultSet.next()) {
+                    Person person = new Person(
+                            resultSet.getString("first_name"),
+                            resultSet.getString("last_name")
+                    );
+                    person.setPerson_id(resultSet.getInt("person_id"));
+                    result.add(person);
+                }
+                return result;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            firstName = names[0];
+            lastName = names[1];
+
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE first_name = ? AND last_name = ?");
+                preparedStatement.setString(1, firstName);
+                preparedStatement.setString(2, lastName);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                List<Person> result = new ArrayList<>();
+                while (resultSet.next()) {
+                    Person person = new Person(
+                            resultSet.getString("first_name"),
+                            resultSet.getString("last_name")
+                    );
+                    person.setPerson_id(resultSet.getInt("person_id"));
+                    result.add(person);
+                }
+                return result;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
         return null;
     }
 

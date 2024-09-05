@@ -1,4 +1,4 @@
-package se.lexicon.DAO.Collections;
+package se.lexicon.DAO.Implementations;
 
 import se.lexicon.DAO.IdSequencer.TodoItemSequencer;
 import se.lexicon.DAO.TodoItems;
@@ -7,12 +7,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class TodoItemsCollection implements TodoItems {
+public class TodoItemsImpl implements TodoItems {
 
     ArrayList<TodoItem> todoItems;
 
     // Constructor
-    public TodoItemsCollection() {
+    public TodoItemsImpl() {
         todoItems = new ArrayList<>();
     }
 

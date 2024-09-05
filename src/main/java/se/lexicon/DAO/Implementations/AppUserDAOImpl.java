@@ -1,4 +1,4 @@
-package se.lexicon.DAO.Collections;
+package se.lexicon.DAO.Implementations;
 
 import se.lexicon.DAO.*;
 import se.lexicon.DAO.IdSequencer.AppUserSequencer;
@@ -7,11 +7,11 @@ import se.lexicon.Model.AppUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppUserDAOCollection implements AppUserDAO {
+public class AppUserDAOImpl implements AppUserDAO {
     private final List<AppUser> appUserList;
 
     // Constructor
-    public AppUserDAOCollection() {
+    public AppUserDAOImpl() {
         appUserList = new ArrayList<>();
     }
 

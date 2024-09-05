@@ -1,6 +1,5 @@
 package se.lexicon;
-import se.lexicon.DAO.Collections.AppUserDAOCollection;
-import se.lexicon.DAO.Collections.PeopleCollection;
+import se.lexicon.DAO.Implementations.PeopleImpl;
 import se.lexicon.Model.*;
 
 
@@ -16,17 +15,37 @@ public class App
         AppRole admin = AppRole.ROLE_APP_ADMIN;
 
         // Create a person
-        PeopleCollection peopleCollection = new PeopleCollection();
-        Person person = new Person("Sami", "Alabed");
-        Person person1 = new Person("Julian", "Alabed");
+        PeopleImpl peopleImpl = new PeopleImpl();
+        Person sami = new Person("Sami", "Alabed");
+        Person julian = new Person("Julian", "Assange");
 
-        System.out.println("Person:\n" + person);
-        System.out.println("Person1:\n" + person1);
+        // Create the persons in the database.
+        peopleImpl.create(sami);
+        peopleImpl.create(julian);
+        System.out.println("PeopleImpl findAll: ");
+        peopleImpl.findAll().forEach(System.out::println);
+        System.out.println("PeopleImpl findById: ");
+        System.out.println(peopleImpl.findById(julian.getPerson_id()));
+        System.out.println("PeopleImpl findByName: ");
+        peopleImpl.findByName("Sami").forEach(System.out::println);
+//        System.out.println("PeopleImpl Update: ");
+//        Person person2 = new Person("Test", "Testesson");
+        // Set the new person's id to Sami's id.
+//        person2.setPerson_id(sami.getPerson_id());
+//        System.out.println(peopleImpl.Update(person2));
+//        System.out.println("Delete Sami: ");
+//        System.out.println(peopleImpl.delete(sami.getPerson_id()));
+//        System.out.println("Delete Julian: ");
+//        System.out.println(peopleImpl.delete(julian.getPerson_id()));
 
-        peopleCollection.create(person);
-        peopleCollection.create(person1);
 
-        System.out.println("PeopleCollection:\n" + peopleCollection.findAll());
+
+
+
+
+
+
+
         // List of AppUser objects
 //        // Create an AppUser object
 //        AppUser credentials = new AppUser("sami.alabed", "password123", admin);

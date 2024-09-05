@@ -13,15 +13,8 @@ public class Person {
     // Constructor
 
     public Person(String first_name, String last_name) {
-
         setFirst_name(first_name);
         setLast_name(last_name);
-    }
-
-    // Helper methods
-    private void setId() {
-        this.person_id = sequencer + 1;
-        sequencer++;
     }
 
     private void validateStringInput(String input, String paramName) {

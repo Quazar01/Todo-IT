@@ -1,4 +1,4 @@
-package se.lexicon.DAO.Collections;
+package se.lexicon.DAO.Implementations;
 
 
 import se.lexicon.DAO.IdSequencer.TodoItemTaskSequencer;
@@ -7,12 +7,12 @@ import se.lexicon.Model.TodoItemTask;
 
 import java.util.ArrayList;
 
-public class TodoItemTaskDAOCollection implements TodoItemTaskDAO {
+public class TodoItemTaskDAOImpl implements TodoItemTaskDAO {
 
     ArrayList<TodoItemTask> todoItemTasks;
 
     // Constructor
-    public TodoItemTaskDAOCollection() {
+    public TodoItemTaskDAOImpl() {
         todoItemTasks = new ArrayList<>();
     }
 

@@ -18,11 +18,9 @@ public class App
         TodoItemsImpl todoItemsImpl = new TodoItemsImpl();
 
         // Create the persons in the database.
-//        Person samiDB = peopleImpl.create(new Person("Sami", "Alabed"));
-//        Person julianDB = peopleImpl.create(new Person ("Julian", "Assange"));
-//
-          Person sami = peopleImpl.findById(13);
-          Person julian = peopleImpl.findById(14);
+        Person sami = peopleImpl.create(new Person("Sami", "Alabed"));
+        Person julian = peopleImpl.create(new Person ("Julian", "Assange"));
+
 
         System.out.println("PeopleImpl findAll: ");
         peopleImpl.findAll().forEach(System.out::println);
@@ -37,22 +35,59 @@ public class App
 //        person2.setPerson_id(sami.getPerson_id());
 //        System.out.println(peopleImpl.Update(person2));
 
-//        System.out.println("Delete Sami: ");
-//        System.out.println(peopleImpl.delete(11));
-//        System.out.println("Delete Julian: ");
-//        System.out.println(peopleImpl.delete(12));
+
 
         // Create a TodoItem object
         TodoItem todoItem = new TodoItem("Test", "Test", sami);
         todoItem.setDeadLine("2024-12-31");
         TodoItem todoItem2 = new TodoItem("Test2", "Test2", julian);
         todoItem2.setDeadLine("2024-12-30");
-        System.out.println(todoItem);
 
         // Create the todoItems in the database.
         System.out.println("TodoItemsImpl create: ");
-//        System.out.println(todoItemsImpl.create(todoItem));
-        System.out.println(todoItemsImpl.create(todoItem2));
+        todoItem = todoItemsImpl.create(todoItem);
+        todoItem2 = todoItemsImpl.create(todoItem2);
+        System.out.println(todoItem);
+        System.out.println(todoItem2);
+
+        // Find all the todoItems in the database.
+        System.out.println("TodoItemsImpl findAll: ");
+        todoItemsImpl.findAll().forEach(System.out::println);
+
+//        // Find the todoItem by id.
+        System.out.println("TodoItemsImpl findById: ");
+        System.out.println(todoItemsImpl.findById(todoItem.getTodo_id()));
+        System.out.println(todoItemsImpl.findById(todoItem2.getTodo_id()));
+
+        // Find the todoItem by done status.
+        System.out.println("TodoItemsImpl findByDoneStatus: ");
+        todoItemsImpl.findByDoneStatus(false).forEach(System.out::println);
+
+        // Find the todoItem by assignee id.
+        System.out.println("TodoItemsImpl findByAssignee: ");
+        todoItemsImpl.findByAssignee(sami.getPerson_id()).forEach(System.out::println);
+
+        // Update the todoItem.
+        // Assign the second todoItem to sami and set it to done.
+        System.out.println("TodoItemsImpl Update: ");
+        todoItem2.setDone(true);
+        todoItem2.setAssignee(sami);
+        System.out.println(todoItemsImpl.update(todoItem2));
+
+        // Find the todoItem by assignee object. Returns empty collection.
+        System.out.println("TodoItemsImpl findByAssignee: ");
+        todoItemsImpl.findByAssignee(julian).forEach(System.out::println);
+
+//        // Delete the todoItems.
+//        System.out.println("Delete Test: ");
+//        System.out.println(todoItemsImpl.delete(todoItem.getTodo_id()));
+//        System.out.println("Delete Test2: ");
+//        System.out.println(todoItemsImpl.delete(todoItem2.getTodo_id()));
+//
+//        System.out.println("Delete Sami: ");
+//        System.out.println(peopleImpl.delete(sami.getPerson_id()));
+//        System.out.println("Delete Julian: ");
+//        System.out.println(peopleImpl.delete(julian.getPerson_id()));
 
     }
 }

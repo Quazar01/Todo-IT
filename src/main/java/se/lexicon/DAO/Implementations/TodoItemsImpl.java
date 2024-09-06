@@ -1,6 +1,5 @@
 package se.lexicon.DAO.Implementations;
 
-import se.lexicon.DAO.IdSequencer.TodoItemSequencer;
 import se.lexicon.DAO.TodoItems;
 import se.lexicon.Model.Person;
 import se.lexicon.Model.TodoItem;

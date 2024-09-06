@@ -8,6 +8,7 @@ public class TodoItem {
     private String title; // Not allowed to be null.
     private String description; // is used to hold further information.
     private LocalDate deadLine; // Not allowed to be null.
+
     // TodoItem is considered overdue if deadLine current date > deadLine.
     private boolean done; // default value is false.
     private Person creator; // Represents the person who created the TodoItem.
@@ -79,11 +80,7 @@ public class TodoItem {
         return done;
     }
     public void setDone(boolean done) {
-        if (done == this.done){
-            throw new IllegalArgumentException("done is already set to " + done);
-        } else {
-            this.done = done;
-        }
+        this.done = done;
     }
     public Person getAssignee() {
         return creator;
@@ -93,9 +90,6 @@ public class TodoItem {
             throw new NullPointerException("creator must not be null");
         }
         this.creator = creator;
-    }
-    public boolean isOverDue() {
-        return LocalDate.now().isAfter(deadLine);
     }
 
     @Override

@@ -157,14 +157,16 @@ public class PeopleImpl implements People {
 
     @Override
     public boolean delete(int id) {
+        String DELETE_PERSON = "DELETE FROM person WHERE person_id = ?";
+
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM person WHERE person_id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PERSON);
             preparedStatement.setInt(1, id);
 
-            return preparedStatement.execute();
+            int result = preparedStatement.executeUpdate();
+            return result == 1;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return true;
     }
 }

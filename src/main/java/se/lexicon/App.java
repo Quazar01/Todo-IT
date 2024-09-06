@@ -78,16 +78,17 @@ public class App
         System.out.println("TodoItemsImpl findByAssignee: ");
         todoItemsImpl.findByAssignee(julian).forEach(System.out::println);
 
-//        // Delete the todoItems.
-//        System.out.println("Delete Test: ");
-//        System.out.println(todoItemsImpl.delete(todoItem.getTodo_id()));
-//        System.out.println("Delete Test2: ");
-//        System.out.println(todoItemsImpl.delete(todoItem2.getTodo_id()));
-//
-//        System.out.println("Delete Sami: ");
-//        System.out.println(peopleImpl.delete(sami.getPerson_id()));
-//        System.out.println("Delete Julian: ");
-//        System.out.println(peopleImpl.delete(julian.getPerson_id()));
+
+        // Delete the todoItems.
+        System.out.println("Delete Test: ");
+        System.out.println(todoItemsImpl.delete(todoItem.getTodo_id()));
+        System.out.println("Delete Test2: ");
+        System.out.println(todoItemsImpl.delete(todoItem2.getTodo_id()));
+
+        System.out.println("Delete Sami: ");
+        System.out.println(peopleImpl.delete(sami.getPerson_id()));
+        System.out.println("Delete Julian: ");
+        System.out.println(peopleImpl.delete(julian.getPerson_id()));
 
     }
 }

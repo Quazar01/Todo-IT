@@ -6,9 +6,6 @@ public class Person {
     private int person_id;
     private String first_name; // Not allowed to be null.
     private String last_name; // Not allowed to be null.
-    private String email; // Not allowed to be null.
-    private static int sequencer = 0;
-    private AppUser credentials;
 
     // Constructor
 
@@ -20,9 +17,6 @@ public class Person {
     private void validateStringInput(String input, String paramName) {
         if (input == null || input.trim().isEmpty()) {
             throw new IllegalArgumentException(paramName + " must not be null or empty");
-        }
-        if (paramName.equals("email") && !input.contains("@")) {
-            throw new IllegalArgumentException("email must contain @");
         }
     }
 
@@ -42,12 +36,7 @@ public class Person {
     public String getLast_name() {
         return last_name;
     }
-    public AppUser getCredentials() {
-        return credentials;
-    }
-    public String getEmail() {
-        return email;
-    }
+
     public void setFirst_name(String first_name) {
         validateStringInput(first_name, "firstName");
         this.first_name = first_name;
@@ -56,17 +45,6 @@ public class Person {
         validateStringInput(last_name, "lastName");
         this.last_name = last_name;
     }
-    public void setCredentials(AppUser credentials) {
-        if (credentials == null) {
-            throw new IllegalArgumentException("credentials must not be null");
-        }
-        this.credentials = credentials;
-    }
-    public void setEmail(String email) {
-        validateStringInput(email, "email");
-        this.email = email;
-    }
-
     // Methods
 
 
@@ -77,7 +55,6 @@ public class Person {
                 "id: " + person_id +
                 ", firstName: '" + first_name + '\'' +
                 ", lastName: '" + last_name + '\'' +
-                ", email: '" + email +
                 '}';
     }
 
@@ -86,12 +63,12 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return  Objects.equals(first_name, person.first_name) && Objects.equals(last_name, person.last_name) && Objects.equals(email, person.email);
+        return  Objects.equals(first_name, person.first_name) && Objects.equals(last_name, person.last_name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(first_name, last_name, email);
+        return Objects.hash(first_name, last_name);
     }
 }
 

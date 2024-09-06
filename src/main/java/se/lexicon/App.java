@@ -12,8 +12,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        AppRole user = AppRole.ROLE_APP_USER;
-        AppRole admin = AppRole.ROLE_APP_ADMIN;
 
         // Create a person
         PeopleImpl peopleImpl = new PeopleImpl();
@@ -56,26 +54,5 @@ public class App
 //        System.out.println(todoItemsImpl.create(todoItem));
         System.out.println(todoItemsImpl.create(todoItem2));
 
-
-
-
-        // List of AppUser objects
-//        // Create an AppUser object
-//        AppUser credentials = new AppUser("sami.alabed", "password123", admin);
-//        // Create another AppUser object
-//        AppUser credentials2 = new AppUser("julian", "password123", user);
-//
-//        // Use the AppUserDAOCollection class to persist the AppUser objects
-//        AppUserDAOCollection appUserDAOCollection = new AppUserDAOCollection();
-//        appUserDAOCollection.persist(credentials);
-//        appUserDAOCollection.persist(credentials2);
-//        System.out.println("AppUserDAOCollection:\n" + appUserDAOCollection.findAll());
-//
-//        // Use the AppUserDAOCollection class to find an AppUser object by username
-//        System.out.println("AppUserDAOCollection:\n" + appUserDAOCollection.findByUserName("sami.alabed"));
-//
-//        // Use the AppUserDAOCollection class to remove an AppUser object by username
-//        appUserDAOCollection.remove("sami.alabed");
-//        System.out.println("AppUserDAOCollection:\n" + appUserDAOCollection.findAll());
     }
 }

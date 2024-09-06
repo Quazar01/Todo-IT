@@ -11,12 +11,11 @@ import java.util.Collection;
 import java.util.List;
 
 public class PeopleImpl implements People {
-    ArrayList<Person> people;
+    Connection connection = SQLConnection.getConnection();
 
     @Override
     public Person create(Person person) {
         try {
-            Connection connection = SQLConnection.getConnection();
             String CREATE_PERSON = "INSERT INTO person (first_name, last_name) VALUES (?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_PERSON, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, person.getFirst_name());
@@ -39,7 +38,6 @@ public class PeopleImpl implements People {
     public Collection<Person> findAll() {
         List<Person> result = new ArrayList<>();
         try {
-            Connection connection = SQLConnection.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM person");
 
@@ -60,7 +58,7 @@ public class PeopleImpl implements People {
     @Override
     public Person findById(int id) {
         try {
-            Connection connection = SQLConnection.getConnection();
+
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE person_id = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -81,7 +79,6 @@ public class PeopleImpl implements People {
 
     @Override
     public Collection<Person> findByName(String name) {
-        Connection connection = SQLConnection.getConnection();
 
         // Seperate the first name and last name
         String[] names = name.split(" ");
@@ -145,7 +142,6 @@ public class PeopleImpl implements People {
     @Override
     public Person Update(Person person) {
         try {
-            Connection connection = SQLConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE person SET first_name = ?, last_name = ? WHERE person_id = ?");
             preparedStatement.setString(1, person.getFirst_name());
             preparedStatement.setString(2, person.getLast_name());
@@ -162,7 +158,6 @@ public class PeopleImpl implements People {
     @Override
     public boolean delete(int id) {
         try {
-            Connection connection = SQLConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM person WHERE person_id = ?");
             preparedStatement.setInt(1, id);
 

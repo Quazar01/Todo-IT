@@ -1,5 +1,6 @@
 package se.lexicon;
 import se.lexicon.DAO.Implementations.PeopleImpl;
+import se.lexicon.DAO.Implementations.TodoItemsImpl;
 import se.lexicon.Model.*;
 
 
@@ -16,32 +17,44 @@ public class App
 
         // Create a person
         PeopleImpl peopleImpl = new PeopleImpl();
-        Person sami = new Person("Sami", "Alabed");
-        Person julian = new Person("Julian", "Assange");
+        TodoItemsImpl todoItemsImpl = new TodoItemsImpl();
 
         // Create the persons in the database.
-        peopleImpl.create(sami);
-        peopleImpl.create(julian);
+//        Person samiDB = peopleImpl.create(new Person("Sami", "Alabed"));
+//        Person julianDB = peopleImpl.create(new Person ("Julian", "Assange"));
+//
+          Person sami = peopleImpl.findById(13);
+          Person julian = peopleImpl.findById(14);
+
         System.out.println("PeopleImpl findAll: ");
         peopleImpl.findAll().forEach(System.out::println);
         System.out.println("PeopleImpl findById: ");
         System.out.println(peopleImpl.findById(julian.getPerson_id()));
         System.out.println("PeopleImpl findByName: ");
         peopleImpl.findByName("Sami").forEach(System.out::println);
+
 //        System.out.println("PeopleImpl Update: ");
 //        Person person2 = new Person("Test", "Testesson");
         // Set the new person's id to Sami's id.
 //        person2.setPerson_id(sami.getPerson_id());
 //        System.out.println(peopleImpl.Update(person2));
+
 //        System.out.println("Delete Sami: ");
-//        System.out.println(peopleImpl.delete(sami.getPerson_id()));
+//        System.out.println(peopleImpl.delete(11));
 //        System.out.println("Delete Julian: ");
-//        System.out.println(peopleImpl.delete(julian.getPerson_id()));
+//        System.out.println(peopleImpl.delete(12));
 
+        // Create a TodoItem object
+        TodoItem todoItem = new TodoItem("Test", "Test", sami);
+        todoItem.setDeadLine("2024-12-31");
+        TodoItem todoItem2 = new TodoItem("Test2", "Test2", julian);
+        todoItem2.setDeadLine("2024-12-30");
+        System.out.println(todoItem);
 
-
-
-
+        // Create the todoItems in the database.
+        System.out.println("TodoItemsImpl create: ");
+//        System.out.println(todoItemsImpl.create(todoItem));
+        System.out.println(todoItemsImpl.create(todoItem2));
 
 
 

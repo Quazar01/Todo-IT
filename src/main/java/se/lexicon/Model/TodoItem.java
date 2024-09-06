@@ -15,9 +15,9 @@ public class TodoItem {
 
     // Constructor
     public TodoItem(String title, String description, Person creator) {
-        setId();
         setTitle(title);
         setDescription(description);
+
         this.done = false;
         if (creator == null) {
             throw new NullPointerException("creator must not be null");
@@ -64,6 +64,7 @@ public class TodoItem {
     public LocalDate getDeadLine() {
         return deadLine;
     }
+
     public void setDeadLine(String stringDate) {
         if (stringDate == null || stringDate.isEmpty()) {
             throw new IllegalArgumentException("deadLine must not be null or empty");
@@ -105,6 +106,7 @@ public class TodoItem {
                 ", taskDescription='" + description + '\'' +
                 ", deadLine=" + deadLine +
                 ", done=" + done +
+                ", creator=" + creator +
                 '}';
     }
 
